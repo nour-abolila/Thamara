@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Http\JsonResponse;
 
+
 class ApiResponse
 {
     public static function success(string $message = 'Success', $data = [], int $status = 200): JsonResponse
