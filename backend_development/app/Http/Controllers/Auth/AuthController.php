@@ -10,14 +10,15 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Http\Requests\Auth\VerifyOtpRequest;
 use App\Http\Requests\Auth\VerifyPasswordRequest;
+use App\Http\Resources\UserLoginResource;
 use App\Models\User;
-
 use App\Services\Auth\AuthService;
 use App\Services\Auth\OtpService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
-{   // Dependency Injection لل Services , بستدعى الخدمات فى الكونستركتور
+{
+    // Dependency Injection لل Services , بستدعى الخدمات فى الكونستركتور
     public function __construct(protected AuthService $authService, protected OtpService $otpService) {}
 
 
@@ -69,15 +70,15 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {   // بجيب اليوزر من ال Auth service
-        $user = $this->authService->login($request->validated());
+        $result = $this->authService->login($request->validated());
 
         // لو اليوزر مش موجود
-        if (!$user) {
+        if (!$result) {
             return ApiResponse::error('Invalid credentials', [], 401);
         }
 
         // لو الايميل مش متفعل
-        if ($user === 'email_not_verified') {
+        if ($result === 'email_not_verified') {
             return ApiResponse::error('Email not verified. Please verify your email before logging in.', [], 403);
         }
 
@@ -85,11 +86,12 @@ class AuthController extends Controller
         return ApiResponse::success(
             'Login successful',
             [
-                'user' => $user['user'],
-                'access_token' => $user['access_token']
+                'user' => new UserLoginResource($result['user']),
+                'access_token' => $result['access_token']
             ],
         );
     }
+
 
 
     public function logout(Request $request)
@@ -102,6 +104,7 @@ class AuthController extends Controller
     }
 
 
+
     public function forgotPassword(ForgotPasswordRequest $request)
     {
         $user = $this->authService->forgetPassword($request->email); // بجيب اليوزر من ال Auth service عن طريق الايميل
@@ -112,6 +115,7 @@ class AuthController extends Controller
 
         return ApiResponse::success('OTP sent to your email', ['user_id' => $user->id,], 200);
     }
+
 
 
     public function verifyPassword(VerifyPasswordRequest $request)
@@ -127,6 +131,7 @@ class AuthController extends Controller
     }
 
 
+
     public function resetPassword(ResetPasswordRequest $request)
     {
         $user = $this->authService->forgetPassword($request->email);
@@ -135,6 +140,7 @@ class AuthController extends Controller
 
         return ApiResponse::success('Password has been reset successfully.', [], 200);
     }
+
 
 
     public function resendOtp(ForgotPasswordRequest $request)

@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('first_name');
             $table->string('last_name');
-            $table->text('profile_image')->nullable();
-            $table->text('user_bio')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('otp_code')->nullable();
             $table->timestamp('otp_expires_at')->nullable();

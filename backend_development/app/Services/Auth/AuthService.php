@@ -10,22 +10,17 @@ class AuthService
 {
     public function register(array $data)
     {
-        // if (isset($data['profile_image'])) {
-        //     $path = $data['profile_image'] = $data['profile_image']->store('profile_images', 'public');
-        // }
-
         $user = User::create([
             'first_name'   => $data['first_name'],
             'last_name'    => $data['last_name'],
             'email'        => $data['email'],
             'password'     => Hash::make($data['password']),
-            'profile_image' => $data['profile_image'] ?? null,
-            'user_bio'     => $data['user_bio'] ?? null,
             'phone_number' => $data['phone_number'] ?? null,
         ]);
 
         return $user; // Return the created user instance
     }
+
 
 
     public function verifyEmail(User $user): void //  دى بتاخد اليوزر وبتحدثله عمود التحقق بتاع الايميل
@@ -34,6 +29,7 @@ class AuthService
             'email_verified_at' => Carbon::now(),
         ]);
     }
+
 
 
     public function login(array $data)
@@ -61,6 +57,7 @@ class AuthService
     }
 
 
+
     public function logout(User $user): void
     {
         // مسح كل التوكنات بتاعت المستخدم
@@ -68,11 +65,13 @@ class AuthService
     }
 
 
+
     public function forgetPassword(string $email): User
     {
         // البحث عن المستخدم بناءً على البريد الإلكتروني
         return User::where('email', $email)->firstOrFail();
     }
+
 
 
     public function resetPassword(User $user, string $password): void

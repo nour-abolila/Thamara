@@ -21,8 +21,6 @@ class User extends Authenticatable
     protected $fillable = [ // كل الحقول اللي محتاج المستخدم يقدر يعدل عليها
         'first_name',
         'last_name',
-        'profile_image',
-        'user_bio',
         'phone_number',
         'otp_code',
         'otp_expires_at',
@@ -30,6 +28,11 @@ class User extends Authenticatable
         'password',
         'email_verified_at',
     ];
+
+    public function detections()
+    {
+        return $this->hasMany(Detection::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
