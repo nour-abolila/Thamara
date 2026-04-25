@@ -16,7 +16,7 @@ Route::get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/detections', [DetectionController::class, 'storeUserDetection']);
-    Route::get('/detections', [DetectionController::class, 'getUserDetections']);
+    Route::get('/detections/{id?}', [DetectionController::class, 'getUserDetections']);
     Route::get('/profile', [UserController::class, 'getUserprofile']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
@@ -28,8 +28,3 @@ Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/verify-password', [AuthController::class, 'verifyPassword']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::post('/resend-otp', [AuthController::class, 'resendOtp']);
-
-
-
-
-

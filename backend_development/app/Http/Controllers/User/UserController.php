@@ -12,15 +12,18 @@ class UserController extends Controller
 {
     public function getUserprofile(Request $request)
     {
-        $user = $request->user(); 
+        $user = $request->user();
 
         if (!$user) {
             return response()->json('User Not Found', 404);
         }
 
-        return response()->json([
-            'status' => 'success',
-            'user_data' => new UserProfileResource($user),
-        ], 200);
+
+        return ApiResponse::success(
+            'User profile retrieved successfully.',
+            [
+                'user' => new UserProfileResource($user),
+            ],
+        );
     }
 }

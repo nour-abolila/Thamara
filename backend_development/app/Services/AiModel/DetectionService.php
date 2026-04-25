@@ -25,8 +25,29 @@ class DetectionService
 
 
   // Get all detections for a specific user
-  public function getUserDetections($user)
+  // public function getUserDetections($user, $id = null)
+  // {
+  //   $query = $user->detections()->latest();
+
+  //   if ($id) {
+  //     $query->where('id', $id);
+  //   }
+
+  //   return $query->get(); // Get detections for the authenticated user, ordered by latest
+  // }
+
+
+  public function getUserDetections($user, $id = null)
   {
-    return $user->detections()->latest()->get(); // Get detections for the authenticated user, ordered by latest
+    $query = $user->detections()->latest();
+
+    if ($id) {
+      $query->where('id', $id);
+      return $query->get();
+    }
+
+    return $query->get()
+      ->unique('plant_name')
+      ->values();
   }
 }

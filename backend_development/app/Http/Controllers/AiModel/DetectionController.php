@@ -18,7 +18,7 @@ class DetectionController extends Controller
 
     // Store the detection result in the database
     public function storeUserDetection(StoreDetectionRequest $request)
-    {   
+    {
         $user = Auth::user(); // Get the authenticated user
         $detection = $this->detectionService->storedetection($request, $user);
 
@@ -30,10 +30,10 @@ class DetectionController extends Controller
 
 
     // Get all detections for the authenticated user
-    public function getUserDetections(Request $request)
+    public function getUserDetections(Request $request, $id = null)
     {
         $user = Auth::user();
-        $detections = $this->detectionService->getUserDetections($user);
+        $detections = $this->detectionService->getUserDetections($user, $id);
 
         return ApiResponse::success(
             'Detections retrieved successfully',
