@@ -14,7 +14,10 @@ use App\Http\Resources\UserLoginResource;
 use App\Models\User;
 use App\Services\Auth\AuthService;
 use App\Services\Auth\OtpService;
+use App\Services\Notification\FCMService;
+use App\Services\Notification\NotificationSender;
 use Illuminate\Http\Request;
+
 
 class AuthController extends Controller
 {
@@ -153,4 +156,27 @@ class AuthController extends Controller
 
         return ApiResponse::success('OTP resent to your email', ['user_id' => $user->id,], 200);
     }
+
+
+
+    // public function sendnotification(Request $request)
+    // {
+    //     $notification = (object)[
+    //     'title' => 'اطمنى يا ماريف 🚀',
+    //     'body'  => 'شغلك شغال زى الفل انا اللى لسة ',
+    //     'id'    => 1,
+    //     'type'  => 'test',
+    //     'image_url' => null,
+    // ];
+
+    // $tokens = [
+    //     'fRAm0NA4TBiRoDDj9C9uVP:APA91bFA7ZMNBcFR9d3ZFoVVFeGfeuYj6el-fFgnqe0ejMYhozZ4BKBRLU5EzDuF5_Yr2AQvRK2UKwuzL9nR0kTiB_v2sB4EhP_WtEiGC22i4JHUCO5mIiM'
+    // ];
+
+    // $sender = new NotificationSender();
+
+    // $result = $sender->sendNotification($notification, $tokens);
+
+    // return response()->json($result);
+    // }
 }

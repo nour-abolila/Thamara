@@ -27,6 +27,9 @@ class User extends Authenticatable
         'email',
         'password',
         'email_verified_at',
+        'fcm_token',
+        'latitude',
+        'longitude'
     ];
 
     public function detections()
@@ -54,6 +57,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'latitude' => 'decimal:7',
+            'longitude' => 'decimal:7',
         ];
     }
 }

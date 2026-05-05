@@ -28,3 +28,4 @@ Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/verify-password', [AuthController::class, 'verifyPassword']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::post('/resend-otp', [AuthController::class, 'resendOtp']);
+// Route::post('/send', [AuthController::class, 'sendnotification']);

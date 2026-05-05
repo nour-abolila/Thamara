@@ -22,6 +22,9 @@ class UserLoginResource extends JsonResource
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'created_at' => $this->created_at->format('Y-m-d H:i'),
+            'fcm_token' => $this->fcm_token,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
         ];
     }
 }

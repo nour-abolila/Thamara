@@ -39,4 +39,9 @@ return [
         'project_id' => env('FIREBASE_PROJECT_ID'),
     ],
 
+    'weather' => [
+    'base_url' => env('WEATHER_BASE_URL'),
+    'api_key'  => env('WEATHER_API_KEY'),
+],
+
 ];
