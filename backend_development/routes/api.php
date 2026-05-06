@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AiModel\DetectionController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -19,7 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/detections/{id?}', [DetectionController::class, 'getUserDetections']);
     Route::get('/profile', [UserController::class, 'getUserprofile']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/notifications', [NotificationController::class, 'index']);
 });
+
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
@@ -28,4 +32,3 @@ Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/verify-password', [AuthController::class, 'verifyPassword']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::post('/resend-otp', [AuthController::class, 'resendOtp']);
-// Route::post('/send', [AuthController::class, 'sendnotification']);

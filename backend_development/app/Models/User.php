@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->hasMany(Detection::class);
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'notifiable_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
