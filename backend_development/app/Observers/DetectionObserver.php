@@ -3,7 +3,10 @@
 
 namespace App\Observers;
 
+use \App\Models\User;
+use \Illuminate\Support\Str;
 use App\Models\Detection;
+use App\Models\Notification;
 use App\Notifications\WeatherDiseaseNotification;
 use App\Services\Notification\NotificationSender;
 use App\Services\WeatherApi\WeatherService;
@@ -16,9 +19,9 @@ class DetectionObserver
         private NotificationSender $notificationSender
     ) {}
 
-    /**
-     * بيتفعل تلقائياً لما detection جديد يتحفظ في الـ DB
-     */
+
+    // بيتفعل تلقائياً لما detection جديد يتحفظ في الـ DB
+
     public function created(Detection $detection): void
     {
         info('ai');
@@ -84,25 +87,21 @@ class DetectionObserver
             [$user->fcm_token]
         );
 
-        info('Creating in-app notification record');
-        try {
-            \App\Models\Notification::create([
-                'id'               => \Illuminate\Support\Str::uuid(),
-                'type'             => 'weather_alert',
-                'notifiable_type'  => \App\Models\User::class,
-                'notifiable_id'    => $user->id,
-                'data'             => [
-                    'title'        => $alert['title'],
-                    'body'         => $alert['body'],
-                    'detection_id' => $detection->id,
-                ],
-            ]);
-            info('Notification record created successfully');
-        } catch (\Throwable $e) {
-            Log::error('Failed to create notification record', [
-                'error' => $e->getMessage(),
-            ]);
-        }
+        // سجل في الـ DB كمان عشان نقدر نعرضه في التطبيق
+
+        Notification::create([
+            'id'               => Str::uuid(),
+            'type'             => 'weather_alert',
+            'notifiable_type'  => User::class,
+            'notifiable_id'    => $user->id,
+            'data'             => [
+                'title'        => $alert['title'],
+                'body'         => $alert['body'],
+                'detection_id' => $detection->id,
+            ],
+        ]);
+
+        // سجل في اللوجز عشان اقدر اتابع
 
         Log::info('DetectionObserver: alert sent', [
             'user_id'      => $user->id,
@@ -126,7 +125,7 @@ class DetectionObserver
         $disease = strtolower(trim($diseaseName));
 
 
-        // MANGO
+        // MANGO if conditions
 
         if ($disease === 'mango_anthracnose') {
             if ($precip > 5 && $humidity > 85) {
@@ -210,7 +209,7 @@ class DetectionObserver
         }
 
 
-        // CITRUS
+        // CITRUS if conditions
 
         if ($disease === 'citrus_black_spot') {
             if ($humidity > 80 && $precip > 5) {

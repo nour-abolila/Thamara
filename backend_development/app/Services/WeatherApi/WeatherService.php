@@ -25,7 +25,6 @@ class WeatherService
 
         $data = $response->json();
 
-        // بنرجع الـ 4 قيم اللي محتاجينهم بس
         return [
             'temp'      => $data['current']['temp_c'],
             'humidity'  => $data['current']['humidity'],

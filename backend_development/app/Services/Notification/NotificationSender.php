@@ -25,9 +25,7 @@ class NotificationSender
         $this->setHeaders();
     }
 
-    /* ------------------------------------------------------------
-     | Setup
-     |------------------------------------------------------------ */
+    // Setup Methods
 
     private function setClient(): void
     {
@@ -57,9 +55,7 @@ class NotificationSender
         });
     }
 
-    /* ------------------------------------------------------------
-     | Public API
-     |------------------------------------------------------------ */
+    // Public API
 
     public function sendNotification(object $notification, array $deviceTokens): array
     {
@@ -100,8 +96,8 @@ class NotificationSender
             'rejected' => function ($reason, $index) use (&$failedTokens, $deviceTokens) {
                 $failedTokens[$deviceTokens[$index]] =
                     $reason instanceof Exception
-                        ? $reason->getMessage()
-                        : 'Request rejected';
+                    ? $reason->getMessage()
+                    : 'Request rejected';
             },
         ]);
 
@@ -120,9 +116,7 @@ class NotificationSender
         ];
     }
 
-    /* ------------------------------------------------------------
-     | Helpers
-     |------------------------------------------------------------ */
+    // Helpers
 
     private function buildPayload(object $notification, string $token): array
     {
@@ -134,7 +128,7 @@ class NotificationSender
                     'title' => $notification->title,
                     'body'  => $notification->body,
                     'image' => null
-                      
+
                 ],
 
                 'data' => [
@@ -165,7 +159,7 @@ class NotificationSender
 
         $failedTokens[$token] = $error['message'] ?? json_encode($body);
 
-        // 🔥 IMPORTANT: Remove invalid tokens
+        //  IMPORTANT Remove invalid tokens
         if (
             isset($error['status']) &&
             in_array($error['status'], ['NOT_FOUND', 'UNREGISTERED'])
@@ -176,7 +170,6 @@ class NotificationSender
 
     private function deleteInvalidToken(string $token): void
     {
-        // مثال:
         // DeviceToken::where('token', $token)->delete();
 
         Log::warning('FCM invalid token removed', [
