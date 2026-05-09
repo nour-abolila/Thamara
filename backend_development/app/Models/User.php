@@ -27,11 +27,19 @@ class User extends Authenticatable
         'email',
         'password',
         'email_verified_at',
+        'fcm_token',
+        'latitude',
+        'longitude'
     ];
 
     public function detections()
     {
         return $this->hasMany(Detection::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'notifiable_id');
     }
 
     /**
@@ -54,6 +62,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'latitude' => 'decimal:7',
+            'longitude' => 'decimal:7',
         ];
     }
 }

@@ -46,6 +46,12 @@ class AuthService
             return 'email_not_verified';
         }
 
+         $user->update([
+        'fcm_token' => $data['fcm_token'] ?? $user->fcm_token,
+        'latitude'  => $data['latitude']  ?? $user->latitude,
+        'longitude' => $data['longitude'] ?? $user->longitude,
+    ]);
+
         // إنشاء Token جديد
         $token = $user->createToken('auth_token')->plainTextToken;
 
