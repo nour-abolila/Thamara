@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use App\Jobs\SendOtpEmailJob;
 use App\Mail\OtpMail;
 use App\Models\User;
 use Carbon\Carbon;
@@ -29,8 +30,9 @@ class OtpService
     // إرسال OTP بالبريد الإلكتروني
     public function sendOtpEmail(User $user, $otp)
     {
-        // هنا بنبعت الكود الأصلي اللي اتولد
-        Mail::to($user->email)->send(new OtpMail($otp));
+        // Mail::to($user->email)->send(new OtpMail($otp));   الكود القديم لإرسال البريد مباشرةً بدلًا من استخدام job
+
+        SendOtpEmailJob::dispatch($user, $otp); // استخدام job لإرسال البريد بشكل غير متزامن
     }
 
 
