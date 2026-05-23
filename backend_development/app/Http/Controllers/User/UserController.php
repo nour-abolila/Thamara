@@ -10,20 +10,20 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function getUserprofile(Request $request)
-    {
-        $user = $request->user();
+    // public function getUserprofile(Request $request)
+    // {
+    //     $user = $request->user();
 
-        if (!$user) {
-            return response()->json('User Not Found', 404);
-        }
+    //     if (!$user) {
+    //         return response()->json('User Not Found', 404);
+    //     }
 
 
-        return ApiResponse::success(
-            'User profile retrieved successfully.',
-            [
-                'user' => new UserProfileResource($user),
-            ],
-        );
-    }
+    //     return ApiResponse::success(
+    //         'User profile retrieved successfully.',
+    //         [
+    //             'user' => new UserProfileResource($user),
+    //         ],
+    //     );
+    // }
 }
