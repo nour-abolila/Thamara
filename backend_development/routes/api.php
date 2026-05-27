@@ -4,11 +4,9 @@ use App\Http\Controllers\AiModel\DetectionController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-
 
 
 
@@ -21,11 +19,10 @@ Route::get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/detections', [DetectionController::class, 'storeUserDetection']);
     Route::get('/detections/{id?}', [DetectionController::class, 'getUserDetections']);
-    // Route::get('/profile', [UserController::class, 'getUserprofile']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/notifications', [NotificationController::class, 'index']);
     Route::get('/user-profile', [UserProfileController::class, 'show']);
-    Route::put('/user-profile', [UserProfileController::class, 'update']);
+    Route::patch('/user-profile', [UserProfileController::class, 'update']);
     Route::delete('/user-profile', [UserProfileController::class, 'destroy']);
 });
 
