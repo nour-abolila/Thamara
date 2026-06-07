@@ -39,13 +39,16 @@ class UserProfileController extends Controller
         );
     }
 
-    
+
 
     public function destroy(Request $request)
     {
         $user = $request->user();
 
         $user->tokens()->delete();
+
+        $user->delete();
+
         return ApiResponse::success(
             'User profile deleted successfully.'
         );
