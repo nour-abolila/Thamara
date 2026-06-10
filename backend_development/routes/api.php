@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\AiModel\DetectionController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -34,3 +36,4 @@ Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/verify-password', [AuthController::class, 'verifyPassword']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::post('/resend-otp', [AuthController::class, 'resendOtp']);
+Route::post('/social-login', [SocialAuthController::class, 'socialLogin']);
