@@ -40,8 +40,20 @@ return [
     ],
 
     'weather' => [
-    'base_url' => env('WEATHER_BASE_URL'),
-    'api_key'  => env('WEATHER_API_KEY'),
-],
+        'base_url' => env('WEATHER_BASE_URL'),
+        'api_key'  => env('WEATHER_API_KEY'),
+    ],
+
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => 'http://example.com/callback-url',
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => 'http://example.com/callback-url',
+    ],
 
 ];
