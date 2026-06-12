@@ -24,7 +24,7 @@ class DetectionProgressController extends Controller
         $path = $request->file('image')->store('detectionscans', 'public');
 
         $progress = DetectionProgress::create([
-            $request->validated(),
+            ...$request->validated(),
             'detection_id' => $detection->id,
             'image_path'   => $path,
         ]);
