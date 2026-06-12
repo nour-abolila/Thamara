@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+
+use App\Models\DetectionProgress;
 use Illuminate\Database\Eloquent\Model;
 
 class Detection extends Model
@@ -20,5 +22,10 @@ class Detection extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function detectionProgress()
+    {
+        return $this->hasMany(DetectionProgress::class)->latest();
     }
 }

@@ -1,13 +1,16 @@
 <?php
 
 use App\Http\Controllers\AiModel\DetectionController;
+use App\Http\Controllers\AiModel\DetectionProgressController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserProfileController;
+use App\Models\DetectionProgress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -21,6 +24,8 @@ Route::get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/detections', [DetectionController::class, 'storeUserDetection']);
     Route::get('/detections/{id?}', [DetectionController::class, 'getUserDetections']);
+    Route::post('/detections/scans/{detection}', [DetectionProgressController::class, 'storeScan']);
+    Route::get('/detections/scans/{detection}', [DetectionProgressController::class, 'getScan']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/notifications', [NotificationController::class, 'index']);
     Route::get('/user-profile', [UserProfileController::class, 'show']);
