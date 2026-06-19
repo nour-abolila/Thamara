@@ -41,4 +41,16 @@ class DetectionController extends Controller
             200
         );
     }
+
+
+    public function deleteUserDetection($id)
+    {
+        $user = Auth::user();
+
+        $this->detectionService->deleteUserDetection($user, $id);
+
+        return ApiResponse::success(
+            'Detection deleted successfully.'
+        );
+    }
 }
