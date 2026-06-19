@@ -12,33 +12,66 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-
-
-
-
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/detections', [DetectionController::class, 'storeUserDetection']);
-    Route::get('/detections/{id?}', [DetectionController::class, 'getUserDetections']);
-    Route::post('/detections/scans/{detection}', [DetectionProgressController::class, 'storeScan']);
-    Route::get('/detections/scans/{detection}', [DetectionProgressController::class, 'getScan']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/notifications', [NotificationController::class, 'index']);
-    Route::get('/user-profile', [UserProfileController::class, 'show']);
-    Route::patch('/user-profile', [UserProfileController::class, 'update']);
-    Route::delete('/user-profile', [UserProfileController::class, 'destroy']);
+Route::controller(AuthController::class)->group(function () {
+
+    Route::post('/register', 'register');
+
+    Route::post('/login', 'login');
+
+    Route::post('/verify-otp', 'verifyOtp');
+
+    Route::post('/resend-otp', 'resendOtp');
+
+    Route::post('/forgot-password', 'forgotPassword');
+
+    Route::post('/verify-password', 'verifyPassword');
+
+    Route::post('/reset-password', 'resetPassword');
 });
 
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('/verify-password', [AuthController::class, 'verifyPassword']);
-Route::post('/reset-password', [AuthController::class, 'resetPassword']);
-Route::post('/resend-otp', [AuthController::class, 'resendOtp']);
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::get('/notifications', [NotificationController::class, 'index']);
+});
+
+
+
+Route::middleware('auth:sanctum')->controller(DetectionController::class)->group(function () {
+
+    Route::post('/detections', 'storeUserDetection');
+
+    Route::get('/detections/{id?}', 'getUserDetections');
+});
+
+
+
+Route::middleware('auth:sanctum')->controller(DetectionProgressController::class)->group(function () {
+
+    Route::post('/detections/scans/{detection}', 'storeScan');
+
+    Route::get('/detections/scans/{detection}', 'getScan');
+});
+
+
+
+Route::middleware('auth:sanctum')->controller(UserProfileController::class)->group(function () {
+
+    Route::get('/user-profile', 'show');
+
+    Route::patch('/user-profile', 'update');
+
+    Route::delete('/user-profile', 'destroy');
+});
+
+
+
 Route::post('/social-login', [SocialAuthController::class, 'socialLogin']);
