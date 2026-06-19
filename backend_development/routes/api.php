@@ -17,7 +17,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::controller(AuthController::class)->group(function () {
+Route::prefix('auth')->controller(AuthController::class)->group(function () {
 
     Route::post('/register', 'register');
 
@@ -36,9 +36,14 @@ Route::controller(AuthController::class)->group(function () {
 
 
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::prefix('auth')->middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+
+
+Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/notifications', [NotificationController::class, 'index']);
 });
@@ -74,4 +79,4 @@ Route::middleware('auth:sanctum')->controller(UserProfileController::class)->gro
 
 
 
-Route::post('/social-login', [SocialAuthController::class, 'socialLogin']);
+Route::post('/auth/social-login', [SocialAuthController::class, 'socialLogin']);

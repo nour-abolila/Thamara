@@ -46,8 +46,15 @@ class DetectionService
       return $query->get();
     }
 
-    return $query->get()
-      ->unique('plant_name')
-      ->values();
+    return $query->get()->unique('plant_name')->values();
+  }
+
+
+
+  public function deleteUserDetection($user, $id)
+  {
+    $detection = Detection::where('user_id', $user->id)->findOrFail($id);
+
+    $detection->delete();
   }
 }
