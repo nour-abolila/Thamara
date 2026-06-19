@@ -24,6 +24,7 @@ Route::get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/detections', [DetectionController::class, 'storeUserDetection']);
     Route::get('/detections/{id?}', [DetectionController::class, 'getUserDetections']);
+    Route::delete('/detections/{id}', [DetectionController::class, 'deleteUserDetection']);
     Route::post('/detections/scans/{detection}', [DetectionProgressController::class, 'storeScan']);
     Route::get('/detections/scans/{detection}', [DetectionProgressController::class, 'getScan']);
     Route::post('/logout', [AuthController::class, 'logout']);
