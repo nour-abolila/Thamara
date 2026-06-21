@@ -18,7 +18,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [ // كل الحقول اللي محتاج المستخدم يقدر يعدل عليها
+    protected $fillable = [
         'first_name',
         'last_name',
         'phone_number',
@@ -69,6 +69,8 @@ class User extends Authenticatable
             'password' => 'hashed',
             'latitude' => 'decimal:7',
             'longitude' => 'decimal:7',
+            'otp_expires_at'    => 'datetime',
+            'otp_last_sent_at'  => 'datetime',
         ];
     }
 }
