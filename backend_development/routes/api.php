@@ -21,7 +21,7 @@ Route::prefix('auth')->controller(AuthController::class)->group(function () {
 
     Route::post('/register', 'register');
 
-    Route::post('/login', 'login');
+    Route::post('/login', 'login')->middleware('throttle:5,1');
 
     Route::post('/verify-otp', 'verifyOtp');
 
@@ -55,6 +55,8 @@ Route::middleware('auth:sanctum')->controller(DetectionController::class)->group
     Route::post('/detections', 'storeUserDetection');
 
     Route::get('/detections/{id?}', 'getUserDetections');
+
+    Route::delete('/detections/{id}', 'deleteUserDetection');
 });
 
 
