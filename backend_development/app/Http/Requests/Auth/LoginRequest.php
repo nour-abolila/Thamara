@@ -24,8 +24,8 @@ class LoginRequest extends FormRequest
         return [
             'email'    => 'required|email',
             'password' => 'required|string|min:6',
-            'fcm_token' => 'nullable|string',        
-            'latitude'  => 'nullable|numeric|between:-90,90',   
+            'fcm_token' => 'nullable|string',
+            'latitude'  => 'nullable|numeric|between:-90,90',
             'longitude' => 'nullable|numeric|between:-180,180',
         ];
     }
