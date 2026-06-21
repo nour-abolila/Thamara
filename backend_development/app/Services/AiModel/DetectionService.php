@@ -6,7 +6,6 @@ use App\Models\Detection;
 
 class DetectionService
 {
-  // Store the detection model ai result in the database
   public function storedetection($request, $user)
   {
     $path = request()->file('image')->store('detections', 'public');
@@ -23,18 +22,6 @@ class DetectionService
     ]);
   }
 
-
-  // Get all detections for a specific user
-  // public function getUserDetections($user, $id = null)
-  // {
-  //   $query = $user->detections()->latest();
-
-  //   if ($id) {
-  //     $query->where('id', $id);
-  //   }
-
-  //   return $query->get(); // Get detections for the authenticated user, ordered by latest
-  // }
 
 
   public function getUserDetections($user, $id = null)
