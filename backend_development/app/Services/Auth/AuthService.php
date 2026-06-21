@@ -18,12 +18,12 @@ class AuthService
             'phone_number' => $data['phone_number'] ?? null,
         ]);
 
-        return $user; // Return the created user instance
+        return $user;
     }
 
 
 
-    public function verifyEmail(User $user): void //  دى بتاخد اليوزر وبتحدثله عمود التحقق بتاع الايميل
+    public function verifyEmail(User $user): void
     {
         $user->update([
             'email_verified_at' => Carbon::now(),
@@ -41,18 +41,18 @@ class AuthService
             return null;
         }
 
-        // لو المستخدم مسجل بس الايميل مش متفعل
+
         if (!$user->email_verified_at) {
             return 'email_not_verified';
         }
 
-         $user->update([
-        'fcm_token' => $data['fcm_token'] ?? $user->fcm_token,
-        'latitude'  => $data['latitude']  ?? $user->latitude,
-        'longitude' => $data['longitude'] ?? $user->longitude,
-    ]);
+        $user->update([
+            'fcm_token' => $data['fcm_token'] ?? $user->fcm_token,
+            'latitude'  => $data['latitude']  ?? $user->latitude,
+            'longitude' => $data['longitude'] ?? $user->longitude,
+        ]);
 
-        // إنشاء Token جديد
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return [
@@ -66,7 +66,6 @@ class AuthService
 
     public function logout(User $user): void
     {
-        // مسح كل التوكنات بتاعت المستخدم
         $user->tokens()->delete();
     }
 
@@ -85,7 +84,7 @@ class AuthService
         $user->update([
             'password' => Hash::make($password),
         ]);
-        // مسح كل التوكنز القديمة
+
         $user->tokens()->delete();
     }
 }

@@ -12,8 +12,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;  // Allow all users to make this request
-        // لازم اخليها true عشان اي حد يقدر يعمل تسجيل دخول   
+        return true;
     }
 
     /**
@@ -32,7 +31,7 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    public function messages(): array // دي الدوال بتحدد الرسائل اللي هتظهر لو في خطأ في البيانات اللي جايه من الفورم   
+    public function messages(): array
     {
         return [
             'first_name.required' => 'First name is required.',

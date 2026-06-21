@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class DetectionController extends Controller
 {
-    // Dependency injection of the DetectionService
+    // Dependency injection 
     public function __construct(protected DetectionService $detectionService) {}
 
 
-    // Store the detection result in the database
     public function storeUserDetection(StoreDetectionRequest $request)
     {
-        $user = Auth::user(); // Get the authenticated user
+        $user = Auth::user();
+
         $detection = $this->detectionService->storedetection($request, $user);
 
         return ApiResponse::success(
@@ -29,7 +29,7 @@ class DetectionController extends Controller
     }
 
 
-    // Get all detections for the authenticated user
+
     public function getUserDetections(Request $request, $id = null)
     {
         $user = Auth::user();
@@ -41,6 +41,7 @@ class DetectionController extends Controller
             200
         );
     }
+
 
 
     public function deleteUserDetection($id)

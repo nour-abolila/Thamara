@@ -37,6 +37,7 @@ class DetectionProgressController extends Controller
     }
 
 
+
     public function getScan(Detection $detection)
     {
         if ($detection->user_id !== Auth::id()) {
