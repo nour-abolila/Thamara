@@ -21,17 +21,16 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    // Dependency Injection لل Services , بستدعى الخدمات فى الكونستركتور
+    // Dependency Injection 
     public function __construct(protected AuthService $authService, protected OtpService $otpService) {}
-
 
     public function register(RegisterRequest $request)
     {
-        $user = $this->authService->register($request->validated()); // تسجيل المستخدم
+        $user = $this->authService->register($request->validated());
 
-        $otp = $this->otpService->generateOtp($user); // إنشاء OTP للمستخدم
+        $otp = $this->otpService->generateOtp($user);
 
-        $this->otpService->sendOtpEmail($user, $otp); // إرسال OTP عبر البريد الإلكتروني
+        $this->otpService->sendOtpEmail($user, $otp);
 
         return ApiResponse::success(
             'User registered successfully. Please verify your email using the OTP sent.',
@@ -49,18 +48,18 @@ class AuthController extends Controller
 
         // لو الكود غلط أو منتهى الصلاحية
         if (!$this->otpService->verifyOtp($user, $request->input('otp_code'))) {
+            if (!$user->fresh()->otp_code) {
+                return response()->json(['message' => 'Too many incorrect attempts. Please request a new OTP.'], 422);
+            }
+
             return response()->json(['message' => 'Invalid or expired OTP'], 422);
         }
 
-        // مسح OTP بعد التحقق
-        $this->otpService->clearOtp($user); // دى انا مسجلها فى ال OTP service
+        $this->otpService->clearOtp($user);
 
-        // تفعيل البريد الإلكتروني
-        $this->authService->verifyEmail($user); // دى انا مسجلها فى ال Auth service
+        $this->authService->verifyEmail($user);
 
-        // إنشاء Token جديد للمستخدم
         $token = $user->createToken('auth_token')->plainTextToken;
-
 
         return ApiResponse::success(
             'Email verified successfully.',
@@ -72,20 +71,17 @@ class AuthController extends Controller
 
 
     public function login(LoginRequest $request)
-    {   // بجيب اليوزر من ال Auth service
+    {
         $result = $this->authService->login($request->validated());
 
-        // لو اليوزر مش موجود
         if (!$result) {
             return ApiResponse::error('Invalid credentials', [], 401);
         }
 
-        // لو الايميل مش متفعل
         if ($result === 'email_not_verified') {
             return ApiResponse::error('Email not verified. Please verify your email before logging in.', [], 403);
         }
 
-        // لو كل حاجة تمام برجع اليوزر والتوكن
         return ApiResponse::success(
             'Login successful',
             [
@@ -101,7 +97,7 @@ class AuthController extends Controller
     {
         $user = $request->user(); // جلب المستخدم الحالي
 
-        $user->tokens()->delete(); // حذف كل التوكنات الخاصة بالمستخدم
+        $user->tokens()->delete();
 
         return ApiResponse::success('Logged out successfully');
     }
@@ -110,11 +106,11 @@ class AuthController extends Controller
 
     public function forgotPassword(ForgotPasswordRequest $request)
     {
-        $user = $this->authService->forgetPassword($request->email); // بجيب اليوزر من ال Auth service عن طريق الايميل
+        $user = $this->authService->forgetPassword($request->email);
 
-        $otp = $this->otpService->generateOtp($user); // انشاء OTP للمستخدم
+        $otp = $this->otpService->generateOtp($user);
 
-        $this->otpService->sendOtpEmail($user, $otp); // ارسال OTP عبر البريد الإلكتروني
+        $this->otpService->sendOtpEmail($user, $otp);
 
         return ApiResponse::success('OTP sent to your email', ['user_id' => $user->id,], 200);
     }
@@ -123,7 +119,7 @@ class AuthController extends Controller
 
     public function verifyPassword(VerifyPasswordRequest $request)
     {
-        $user = $this->authService->forgetPassword($request->email); // بجيب اليوزر من ال Auth service عن طريق الايميل
+        $user = $this->authService->forgetPassword($request->email);
 
         // لو اليوزر مش موجود
         if (!$this->otpService->verifyOtp($user, $request->input('otp_code'))) {
@@ -151,6 +147,10 @@ class AuthController extends Controller
         $user = $this->authService->forgetPassword($request->email);
 
         $otp = $this->otpService->generateOtp($user);
+
+        if ($otp === null) {
+            return ApiResponse::error('Please wait before requesting another code.', [], 429);
+        }
 
         $this->otpService->sendOtpEmail($user, $otp);
 
