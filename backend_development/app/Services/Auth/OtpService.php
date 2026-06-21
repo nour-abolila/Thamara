@@ -10,31 +10,41 @@ use Illuminate\Support\Facades\Mail;
 
 class OtpService
 {
-    // توليد OTP جديد
+    const OTP_EXPIRES_MINUTES = 10;
+    const MAX_ATTEMPTS = 5;
+    const RESEND_MINUTES = 2;
+
+
     public function generateOtp(User $user)
     {
-        // توليد كود 6 أرقام عشوائي
+        // منع توليد كود جديد قبل ما الـ cooldown بتاع الـ resend يخلص
+        if (
+            $user->otp_last_sent_at
+            && $user->otp_last_sent_at->addMinutes(self::RESEND_MINUTES)->isAfter(now())
+        ) {
+            return null;
+        }
+
         $otp = rand(100000, 999999);
 
-        // حفظ الكود بشكل مشفر في قاعدة البيانات
         $user->otp_code = Hash::make($otp);
-        $user->otp_expires_at = Carbon::now()->addMinutes(10);
+        $user->otp_expires_at = Carbon::now()->addMinutes(self::OTP_EXPIRES_MINUTES);
+        $user->otp_attempts = 0;
+        $user->otp_last_sent_at = Carbon::now();
         $user->save();
 
-        // إرجاع الكود الأصلي لإرساله للمستخدم
         return $otp;
     }
 
 
-    // إرسال OTP بالبريد الإلكتروني
+
     public function sendOtpEmail(User $user, $otp)
     {
-        // هنا بنبعت الكود الأصلي اللي اتولد
         Mail::to($user->email)->send(new OtpMail($otp));
     }
 
 
-    // التحقق من صحة OTP
+
     public function verifyOtp(User $user, $otp): bool
     {
         // التحقق من وجود كود OTP وصلاحيته
@@ -42,29 +52,37 @@ class OtpService
             return false;
         }
 
-        // لو الكود انتهت صلاحيته
+        // لو المستخدم تجاوز عدد المحاولات المسموح بيها
+        if ($user->otp_attempts >= self::MAX_ATTEMPTS) {
+            $this->clearOtp($user);
+            return false;
+        }
+
+
         if (Carbon::now()->greaterThan($user->otp_expires_at)) {
             $this->clearOtp($user);
             return false;
         }
 
-        // التحقق من صحة الكود باستخدام Hash::check
+
         if (!Hash::check($otp, $user->otp_code)) {
+            // تسجيل محاولة فاشلة
+            $user->increment('otp_attempts');
             return false;
         }
 
-        //  الكود صحيح → نصفره ونرجع true
+
         $this->clearOtp($user);
         return true;
     }
 
 
 
-    // مسح OTP من قاعدة البيانات
     public function clearOtp(User $user)
     {
         $user->otp_code = null;
         $user->otp_expires_at = null;
+        $user->otp_attempts = 0;
         $user->save();
     }
 }
