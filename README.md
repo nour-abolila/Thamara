@@ -1,9 +1,7 @@
-<p align="center">
-  <img src="public/images/thamara_banner.png" alt="Thamara Banner" width="100%">
-</p>
+
 
 <p align="center">
-  <img src="public/images/typing_animation.svg" alt="Thamara Typing Animation" width="480">
+  <img src="public/images/logo.png" alt="Thamara Typing Animation" width="480">
 </p>
 
 <p align="center">
@@ -19,7 +17,6 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/repo-size/nour-abolila/plant-disease-detection-system?style=flat-square&color=2563EB" alt="Repo Size" />
   <img src="https://img.shields.io/github/issues/nour-abolila/plant-disease-detection-system?style=flat-square&color=D97706" alt="Issues" />
   <img src="https://img.shields.io/github/forks/nour-abolila/plant-disease-detection-system?style=flat-square&color=059669" alt="Forks" />
   <img src="https://img.shields.io/github/stars/nour-abolila/plant-disease-detection-system?style=flat-square&color=4F46E5" alt="Stars" />
@@ -141,42 +138,33 @@ sequenceDiagram
       <strong>🔐 Authentication</strong><br/><br/>
       <img src="public/images/auth.png" alt="Auth Mockup" width="100%" style="border-radius: 8px;" />
     </td>
-    <td width="33%" align="center">
-      <strong>🤖 AI Detection</strong><br/><br/>
-      <img src="public/images/homepadge.png" alt="Detection Mockup" width="100%" style="border-radius: 8px;" />
+     <td width="33%" align="center">
+      <strong>🔐 Home padge</strong><br/><br/>
+      <img src="public/images/homepadge.png" alt="Auth Mockup" width="100%" style="border-radius: 8px;" />
     </td>
     <td width="33%" align="center">
-      <strong>📈 Progress Tracking</strong><br/><br/>
-      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=350&auto=format&fit=crop" alt="Progress Mockup" width="100%" style="border-radius: 8px;" />
+      <strong>🤖 AI Detection</strong><br/><br/>
+      <img src="public/images/detect.png" alt="Detection Mockup" width="100%" style="border-radius: 8px;" />
     </td>
   </tr>
   <tr>
-    <td width="33%" align="center">
-      <strong>🔔 Smart Alerts</strong><br/><br/>
-      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=350&auto=format&fit=crop" alt="Alerts Mockup" width="100%" style="border-radius: 8px;" />
+  <td width="33%" align="center">
+      <strong>📈 Progress Tracking</strong><br/><br/>
+      <img src="public/images/scanagain.png" alt="Detection Mockup" width="100%" style="border-radius: 8px;" />
     </td>
     <td width="33%" align="center">
-      <strong>🌦️ Weather Insights</strong><br/><br/>
-      <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=350&auto=format&fit=crop" alt="Weather Mockup" width="100%" style="border-radius: 8px;" />
+      <strong>🔔 Smart Alerts & 🌦️ Weather Insights</strong><br/><br/>
+      <img src="public/images/notification.png" alt="Alerts Mockup" width="100%" style="border-radius: 8px;" />
     </td>
     <td width="33%" align="center">
       <strong>👨‍💼 User Profile</strong><br/><br/>
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=350&auto=format&fit=crop" alt="Profile Mockup" width="100%" style="border-radius: 8px;" />
+      <img src="public/images/personalsetting.png" alt="Profile Mockup" width="100%" style="border-radius: 8px;" />
     </td>
   </tr>
 </table>
 
 ---
 
-## 🛠️ Tech Stack
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=laravel,php,mysql,firebase,flutter,py,tensorflow,gcp,redis,docker,git,github,postman" alt="Thamara Tech Stack" />
-  </a>
-</p>
-
----
 
 ## 🏛️ Backend Architecture
 
@@ -259,100 +247,7 @@ erDiagram
 
 ---
 
-## 🔌 API Design
 
-<table>
-  <thead>
-    <tr>
-      <th>Module</th>
-      <th>Method</th>
-      <th>Endpoint</th>
-      <th>Auth</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="4"><b>🔐 Auth</b></td>
-      <td><kbd>POST</kbd></td>
-      <td><code>/api/auth/register</code></td>
-      <td>❌</td>
-      <td>Register user &amp; dispatch verification OTP</td>
-    </tr>
-    <tr>
-      <td><kbd>POST</kbd></td>
-      <td><code>/api/auth/verify-otp</code></td>
-      <td>❌</td>
-      <td>Verify OTP &amp; receive Sanctum Bearer token</td>
-    </tr>
-    <tr>
-      <td><kbd>POST</kbd></td>
-      <td><code>/api/auth/social-login</code></td>
-      <td>❌</td>
-      <td>Stateless Social Login via Google / Facebook</td>
-    </tr>
-    <tr>
-      <td><kbd>POST</kbd></td>
-      <td><code>/api/auth/logout</code></td>
-      <td>✔️</td>
-      <td>Revoke the current user access token</td>
-    </tr>
-    <tr>
-      <td rowspan="2"><b>🌱 Detection</b></td>
-      <td><kbd>POST</kbd></td>
-      <td><code>/api/detections</code></td>
-      <td>✔️</td>
-      <td>Upload leaf image &amp; get classification</td>
-    </tr>
-    <tr>
-      <td><kbd>GET</kbd></td>
-      <td><code>/api/detections/{id?}</code></td>
-      <td>✔️</td>
-      <td>Get unique history summary or scan details</td>
-    </tr>
-    <tr>
-      <td rowspan="2"><b>📈 Progress</b></td>
-      <td><kbd>POST</kbd></td>
-      <td><code>/api/detections/scans/{id}</code></td>
-      <td>✔️</td>
-      <td>Log subsequent recovery scan</td>
-    </tr>
-    <tr>
-      <td><kbd>GET</kbd></td>
-      <td><code>/api/detections/scans/{id}</code></td>
-      <td>✔️</td>
-      <td>Retrieve chronological scan history</td>
-    </tr>
-    <tr>
-      <td><b>🔔 Alerts</b></td>
-      <td><kbd>GET</kbd></td>
-      <td><code>/api/notifications</code></td>
-      <td>✔️</td>
-      <td>Retrieve location weather-triggered alerts</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><b>👤 Profile</b></td>
-      <td><kbd>GET</kbd></td>
-      <td><code>/api/user-profile</code></td>
-      <td>✔️</td>
-      <td>Fetch profile details</td>
-    </tr>
-    <tr>
-      <td><kbd>PATCH</kbd></td>
-      <td><code>/api/user-profile</code></td>
-      <td>✔️</td>
-      <td>Update personal details and settings</td>
-    </tr>
-    <tr>
-      <td><kbd>DELETE</kbd></td>
-      <td><code>/api/user-profile</code></td>
-      <td>✔️</td>
-      <td>Permanently delete account (Cascade purge)</td>
-    </tr>
-  </tbody>
-</table>
-
----
 
 ## ⚡ Performance Optimization
 
@@ -428,104 +323,19 @@ erDiagram
 
 ---
 
-## 📂 Project Structure
 
-```
-backend_development/
-├── app/
-│   ├── Helpers/            # Custom helpers (e.g. FcmGoogleHelper token generator)
-│   ├── Http/
-│   │   ├── Controllers/    # HTTP Controllers handling request/response flows
-│   │   ├── Requests/       # Custom Form Request input validation rules
-│   │   └── Resources/      # Data conversion layers (Model to structured JSON)
-│   ├── Jobs/               # Queue jobs executed asynchronously in the background
-│   ├── Mail/               # Styled verification and recovery OTP templates
-│   ├── Models/             # Eloquent Models mapping database tables & relationships
-│   ├── Notifications/      # Polymorphic application alerts (e.g. Weather notifications)
-│   ├── Observers/          # Event listener hooks (e.g. DetectionObserver)
-│   ├── Providers/          # Application providers registering service bindings
-│   └── Services/           # Isolated business logic sub-modules (Weather, OTP, Social)
-├── config/                 # Centralized configuration profiles (auth, database, queue)
-├── database/
-│   ├── migrations/         # Table blueprints and indexing configurations
-│   └── factories/          # Seeding mock records for development and testing
-├── routes/
-│   ├── api.php             # Base API routing rules
-│   └── web.php             # Core Web landing points
-└── storage/
-    └── app/public/         # Uploaded images (detections, progress scans)
-```
 
----
-
-## 👥 Meet the Team
-
-<table align="center" width="100%">
-  <tr>
-    <td align="center" width="20%">
-      <img src="https://github.com/nour-abolila.png" width="80" style="border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" /><br/>
-      <b>Nour Abolila</b><br/>
-      <font size="2" color="grey">Backend Developer</font><br/>
-      <a href="https://github.com/nour-abolila">🐙 Profile</a>
-    </td>
-    <td align="center" width="20%">
-      <img src="https://github.com/github.png" width="80" style="border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" /><br/>
-      <b>Mariev</b><br/>
-      <font size="2" color="grey">Flutter Developer</font><br/>
-      <a href="https://github.com">🐙 Profile</a>
-    </td>
-    <td align="center" width="20%">
-      <img src="https://github.com/github.png" width="80" style="border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" /><br/>
-      <b>Eman</b><br/>
-      <font size="2" color="grey">Flutter Developer</font><br/>
-      <a href="https://github.com">🐙 Profile</a>
-    </td>
-    <td align="center" width="20%">
-      <img src="https://github.com/github.png" width="80" style="border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" /><br/>
-      <b>Loai</b><br/>
-      <font size="2" color="grey">AI Engineer</font><br/>
-      <a href="https://github.com">🐙 Profile</a>
-    </td>
-    <td align="center" width="20%">
-      <img src="https://github.com/github.png" width="80" style="border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" /><br/>
-      <b>Mohab</b><br/>
-      <font size="2" color="grey">UI/UX Designer</font><br/>
-      <a href="https://github.com">🐙 Profile</a>
-    </td>
-  </tr>
-</table>
-
----
 
 ## 🎬 Live Demo & Showcase
 
 <p align="center">
   <kbd>
-    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=800&auto=format&fit=crop" alt="Thamara App Demo" width="90%" style="border-radius: 8px;" />
+    <img src="public/images/logo.png" alt="Thamara App Demo" width="90%" style="border-radius: 8px;" />
   </kbd>
 </p>
 
 ---
 
-## 🚀 Future Roadmap
-
-- [ ] **Background AI Processing:** Offload heavy leaf scanning queries to queue pipelines.
-- [ ] **WebSocket Notifications:** Integrate Reverb/Pusher for real-time web-socket broadcasts.
-- [ ] **Predictive Dashboards:** Leverage regional scan metrics to map forward crop disease risk vectors.
-- [ ] **Offline Detection Cache:** SQLite storage integration enabling offline diagnostics.
-- [ ] **Admin Dashboard:** Implement Filament PHP dashboard panels to monitor crop analytics.
-- [ ] **API Versioning:** Build standard `/api/v2/*` endpoints for version stability.
-
----
-
-## 📊 Developer Statistics
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=nour-abolila&show_icons=true&theme=dark" alt="Nour Abolila GitHub Stats" width="48%" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nour-abolila&layout=compact&theme=dark" alt="Top Langs" width="48%" />
-</p>
-
----
 
 ## ⚙️ Installation & Configuration
 
