@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/images/thamara_banner.png" alt="Thamara Banner" width="100%">
+  <img src="public/images/logo.png" alt="Thamara Banner" hight= "50%" width="100%">
 </p>
 
 <p align="center">
@@ -141,27 +141,27 @@ sequenceDiagram
       <strong>🔐 Authentication</strong><br/><br/>
       <img src="public/images/auth.png" alt="Auth Mockup" width="100%" style="border-radius: 8px;" />
     </td>
-    <td width="33%" align="center">
-      <strong>🤖 AI Detection</strong><br/><br/>
-      <img src="public/images/homepadge.png" alt="Detection Mockup" width="100%" style="border-radius: 8px;" />
+     <td width="33%" align="center">
+      <strong>🔐 Home padge</strong><br/><br/>
+      <img src="public/images/homepadge.png" alt="Auth Mockup" width="100%" style="border-radius: 8px;" />
     </td>
     <td width="33%" align="center">
-      <strong>📈 Progress Tracking</strong><br/><br/>
-      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=350&auto=format&fit=crop" alt="Progress Mockup" width="100%" style="border-radius: 8px;" />
+      <strong>🤖 AI Detection</strong><br/><br/>
+      <img src="public/images/detect.png" alt="Detection Mockup" width="100%" style="border-radius: 8px;" />
     </td>
   </tr>
   <tr>
-    <td width="33%" align="center">
-      <strong>🔔 Smart Alerts</strong><br/><br/>
-      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=350&auto=format&fit=crop" alt="Alerts Mockup" width="100%" style="border-radius: 8px;" />
+  <td width="33%" align="center">
+      <strong>📈 Progress Tracking</strong><br/><br/>
+      <img src="public/images/scanagain.png" alt="Detection Mockup" width="100%" style="border-radius: 8px;" />
     </td>
     <td width="33%" align="center">
-      <strong>🌦️ Weather Insights</strong><br/><br/>
-      <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=350&auto=format&fit=crop" alt="Weather Mockup" width="100%" style="border-radius: 8px;" />
+      <strong>🔔 Smart Alerts & 🌦️ Weather Insights</strong><br/><br/>
+      <img src="public/images/notification.png" alt="Alerts Mockup" width="100%" style="border-radius: 8px;" />
     </td>
     <td width="33%" align="center">
       <strong>👨‍💼 User Profile</strong><br/><br/>
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=350&auto=format&fit=crop" alt="Profile Mockup" width="100%" style="border-radius: 8px;" />
+      <img src="public/images/personalsetting.png" alt="Profile Mockup" width="100%" style="border-radius: 8px;" />
     </td>
   </tr>
 </table>
