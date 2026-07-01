@@ -1,9 +1,5 @@
 <p align="center">
-  <img src="public/images/thamara_banner.png" alt="Thamara Banner" width="100%">
-</p>
-
-<p align="center">
-  <img src="public/images/logo.png" alt="Thamara Typing Animation" width="480">
+  <img src="assets/images/logo2.png" alt="Thamara Banner" width="100%">
 </p>
 
 <p align="center">
