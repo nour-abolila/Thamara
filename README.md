@@ -331,9 +331,19 @@ erDiagram
 ## 🎬 Live Demo & Showcase
 
 <p align="center">
-  <kbd>
-    <img src="public/images/logo.png" alt="Thamara App Demo" width="90%" style="border-radius: 8px;" />
-  </kbd>
+
+<a href="https://drive.google.com/file/d/14ilzLuyD2ZJ7D3HsdMLw3zj3wafex9Cf/view?usp=sharing">
+
+<img src="./assets/gifs/demo.gif" width="35%"/>
+
+</a>
+
+</p>
+
+<p align="center">
+  <a href="https://drive.google.com/file/d/14ilzLuyD2ZJ7D3HsdMLw3zj3wafex9Cf/view?usp=sharing">
+    <b>▶ Click the GIF to watch the full demo video.</b>
+  </a>
 </p>
 
 ---
