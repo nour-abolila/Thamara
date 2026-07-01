@@ -128,42 +128,6 @@ sequenceDiagram
 
 ---
 
-## 📱 Screenshots & Mockups
-
-<table width="100%">
-  <tr>
-    <td width="33%" align="center">
-      <strong>🔐 Authentication</strong><br/><br/>
-      <img src="public/images/auth.png" alt="Auth Mockup" width="100%" style="border-radius: 8px;" />
-    </td>
-     <td width="33%" align="center">
-      <strong>🔐 Home padge</strong><br/><br/>
-      <img src="public/images/homepadge.png" alt="Auth Mockup" width="100%" style="border-radius: 8px;" />
-    </td>
-    <td width="33%" align="center">
-      <strong>🤖 AI Detection</strong><br/><br/>
-      <img src="public/images/detect.png" alt="Detection Mockup" width="100%" style="border-radius: 8px;" />
-    </td>
-  </tr>
-  <tr>
-  <td width="33%" align="center">
-      <strong>📈 Progress Tracking</strong><br/><br/>
-      <img src="public/images/scanagain.png" alt="Detection Mockup" width="100%" style="border-radius: 8px;" />
-    </td>
-    <td width="33%" align="center">
-      <strong>🔔 Smart Alerts & 🌦️ Weather Insights</strong><br/><br/>
-      <img src="public/images/notification.png" alt="Alerts Mockup" width="100%" style="border-radius: 8px;" />
-    </td>
-    <td width="33%" align="center">
-      <strong>👨‍💼 User Profile</strong><br/><br/>
-      <img src="public/images/personalsetting.png" alt="Profile Mockup" width="100%" style="border-radius: 8px;" />
-    </td>
-  </tr>
-</table>
-
----
-
-
 ## 🏛️ Backend Architecture
 
 ```mermaid
@@ -321,8 +285,13 @@ erDiagram
 
 ---
 
+## 📱 Screenshots & Mockups
 
+<p align="center">
+<img src="assets/images/hhhh.png" width="100%"/>
+</p>
 
+---
 
 ## 🎬 Live Demo & Showcase
 
@@ -394,7 +363,7 @@ DB_PASSWORD=your_password
 | `DB_DATABASE` | `plant_disease_db` | MySQL DB schema name |
 | `MAIL_HOST` | `smtp.mailtrap.io` | SMTP server endpoint |
 | `GOOGLE_CLIENT_ID` | `your_google_client_id` | OAuth key for Social Login |
-| `FIREBASE_PROJECT_ID` | `thamara-fc885` | Cloud messaging ID |
+| `FIREBASE_PROJECT_ID` | `your_firebase_project_id` | Cloud messaging ID |
 | `WEATHER_API_KEY` | `your_weather_api_token` | Weather data service key |
 
 </details>
@@ -402,5 +371,5 @@ DB_PASSWORD=your_password
 ---
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/content?type=waving&color=10B981&height=100&section=footer" width="100%" />
+  <img src="assets/images/logo2.png" width="100%" />
 </p>
